@@ -9,7 +9,7 @@ document.querySelector("#input-item").addEventListener("keydown", (event) => {
     if (event.isComposing || event.keyCode === 13) {
         sendData();
     }
-})
+});
 
 // Fills todoList with current items in localStorage (if any)
 // JSON format lets us save more than just Strings
