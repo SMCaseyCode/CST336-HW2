@@ -7,8 +7,6 @@ document.querySelector("#input-item").addEventListener("keydown", (event) => {
 })
 
 let todoList = JSON.parse(localStorage.items);
-localStorage.setItem("items", JSON.stringify(todoList));
-
 displayItems();
 
 // Main driver function
@@ -19,10 +17,10 @@ function sendData() {
     // Checks if inserted item is valid, if so, add to list
     if (isValid(newItem)) {
         addItem(newItem);
+        localStorage.setItem("items", JSON.stringify(todoList));
     }
     
     displayItems();
-    editChecked();
 }
 
 function isValid(newItem) {
@@ -31,18 +29,19 @@ function isValid(newItem) {
 }
 
 function addItem(newItem) {
-    todoList.push(newItem);
+    todoList.push({text: newItem, checked: false});
 }
 
 function displayItems(){
     let itemList = document.querySelector("#item-list");
     document.querySelector("#no-items").innerHTML = '';
-    localStorage.items = JSON.stringify(todoList);
 
     // Clears display
     clearDisplay();
-    todoList = JSON.parse(localStorage.items);
     for (let i = 0; i < todoList.length; i++){
+        const item = todoList[i];
+        const isChecked = item.checked;
+        
         itemList.innerHTML += 
             `
              <div class="item-wrapper">
@@ -51,14 +50,23 @@ function displayItems(){
                 </div>
                 
                 <div class="item-text">
-                    <h3 id="item${i}">${todoList[i]}</h3>
+                    <h3 id="item${i}" ${isChecked ? 'style="text-decoration: line-through;"' : ''}>${item.text}</h3>
                 </div> 
                 
                 <div class="item-selections">
-                    <input type="checkbox" name="complete" id="checkbox${i}"/>
+                    <input type="checkbox" name="complete" id="checkbox${i}" ${item.checked ? 'checked' : ''}/>
                 </div>
              </div>
             `;
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        
+        // Not going to lie, ripped this from StackOverflow
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener("change", () => {
+                editChecked(index);
+            });
+        });
     }
     
     if (todoList.length === 0){
@@ -77,18 +85,23 @@ function deleteChecked() {
             todoList.splice(i, 1);
         }
     }
-    
+    localStorage.setItem("items", JSON.stringify(todoList));
     displayItems();
 }
 
-function editChecked(){
-    for (let i = 0; i < todoList.length; i++){
-        let isChecked = document.getElementById(`checkbox${i}`).checked;
+function editChecked(index){
+    let isChecked = document.getElementById(`checkbox${index}`).checked;
+        
+    todoList[index].checked = isChecked;
 
-        if (isChecked){
-            document.getElementById(`#item${i}`).style.textDecoration = "line-through";
-        }
+    let itemText = document.getElementById(`item${index}`);
+
+    if (isChecked){
+        itemText.style.textDecoration = "line-through";
+    } else {
+        itemText.style.textDecoration = "none";
     }
+    localStorage.setItem("items", JSON.stringify(todoList));
 }
 
 function clearDisplay(){
