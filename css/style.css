@@ -1,0 +1,52 @@
+.content, .list, #title {
+    border-color: red;
+    border-style: dashed;
+}
+
+#title {
+    text-align: center;
+}
+
+.content {
+    margin: 4em;
+}
+
+.item-number {
+    font-size: 20px;
+}
+
+.item-text {
+    margin: 0;
+    text-align: center;
+    padding: 0 20px;
+    font-size: 20px;
+    width: 95%;
+}
+
+.item-selections input {
+    height: 17px;
+    width: 17px;
+    margin-top: 5px;
+}
+
+.item-wrapper {
+    display: flex;
+    margin: 0 auto 15px;
+    width: 800px;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+}
+.item-wrapper h3 {
+    margin: 0;
+}
+
+#input-item {
+    width: 500px;
+    margin: 1em;
+}
+
+.input-container {
+    text-align: center;
+}
