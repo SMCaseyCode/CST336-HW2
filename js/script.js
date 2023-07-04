@@ -38,36 +38,37 @@ function displayItems(){
 
     // Clears display
     clearDisplay();
-    for (let i = 0; i < todoList.length; i++){
-        const item = todoList[i];
+    
+    todoList.forEach((arrItem, index) => {
+        const item = todoList[index];
         const isChecked = item.checked;
-        
-        itemList.innerHTML += 
+
+        itemList.innerHTML +=
             `
              <div class="item-wrapper">
                 <div class="item-number">
-                    <h3>${i + 1}. </h3>
+                    <h3>${index + 1}. </h3>
                 </div>
                 
                 <div class="item-text">
-                    <h3 id="item${i}" ${isChecked ? 'style="text-decoration: line-through;"' : ''}>${item.text}</h3>
+                    <h3 id="item${index}" ${isChecked ? 'style="text-decoration: line-through;"' : ''}>${item.text}</h3>
                 </div> 
                 
                 <div class="item-selections">
-                    <input type="checkbox" name="complete" id="checkbox${i}" ${item.checked ? 'checked' : ''}/>
+                    <input type="checkbox" name="complete" id="checkbox${index}" ${item.checked ? 'checked' : ''}/>
                 </div>
              </div>
             `;
 
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        
+
         // Not going to lie, ripped this from StackOverflow
         checkboxes.forEach((checkbox, index) => {
             checkbox.addEventListener("change", () => {
                 editChecked(index);
             });
         });
-    }
+    });
     
     if (todoList.length === 0){
         document.querySelector("#no-items").innerHTML = `<img src="img/no-items.png" alt="No items found"/>`;
