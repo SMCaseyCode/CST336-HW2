@@ -68,25 +68,25 @@ function displayItems(){
                 <div class="item-selections">
                     <input type="checkbox" name="complete" id="checkbox${index}" ${item.checked ? 'checked' : ''}/>
                 </div>
-                <div class="item-selections">
-                    <input type="image" src="img/delete-button.png" name="remove" id="removeimg${index}"/>
+                <div class="item-selections-remove">
+                    <input type="image" src="img/delete-button.png" alt="remove" name="remove" id="removeimg${index}"/>
                 </div>
              </div>
             `;
+    });
 
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const deleteButtons = document.querySelectorAll('input[type="image"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const deleteButtons = document.querySelectorAll('input[type="image"]');
 
-        checkboxes.forEach((checkbox, index) => {
-            checkbox.addEventListener("change", () => {
-                editChecked(index);
-            });
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener("change", () => {
+            editChecked(index);
         });
+    });
 
-        deleteButtons.forEach((button, index) => {
-            button.addEventListener("click", () => {
-                deleteItem(index);
-            });
+    deleteButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+            deleteItem(index);
         });
     });
     

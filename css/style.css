@@ -1,3 +1,7 @@
+* {
+    font-family: 'Patrick Hand', cursive;
+}
+
 body {
     background-color: #fbecce;
 }
@@ -8,8 +12,9 @@ body {
 
 #title {
     text-align: center;
-    margin: 60px 0;
+    margin: 20px 0;
     font-size: 50px;
+    font-family: 'Patrick Hand SC', cursive;
 }
 
 .content {
@@ -34,6 +39,14 @@ body {
     height: 17px;
     width: 17px;
     margin-top: 5px;
+    cursor: pointer;
+}
+
+.item-selections-remove input {
+    height: 17px;
+    width: 17px;
+    margin-top: 5px;
+    margin-left: 4px;
     cursor: pointer;
 }
 
@@ -76,14 +89,24 @@ body {
     border-radius: 3px;
     cursor: pointer;
     font-size: 20px;
+    background-color: white;
 }
 
 #remove-completed-btn {
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
-    height: 30px;
+    height: 35px;
     font-size: 20px;
+    background-color: white;
+}
+
+#submit-btn:hover {
+    opacity: 80%;
+}
+
+#remove-completed-btn:hover {
+    opacity: 80%;
 }
 
 #delete-button {
@@ -92,7 +115,7 @@ body {
 }
 
 #no-items img{
-    width: 570px;
+    width: 600px;
     padding: 30px;
     display: block;
     margin: 20px auto 0;
