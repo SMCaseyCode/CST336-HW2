@@ -20,13 +20,14 @@
     text-align: center;
     padding: 0 20px;
     font-size: 20px;
-    width: 95%;
+    width: 100%;
 }
 
 .item-selections input {
     height: 17px;
     width: 17px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .item-wrapper {
@@ -43,10 +44,33 @@
 }
 
 #input-item {
-    width: 500px;
+    width: 450px;
+    height: 30px;
     margin: 1em;
+    padding-left: 20px;
+    border-style: double;
+    border-radius: 3px;
 }
 
 .input-container {
     text-align: center;
+}
+
+#submit-btn {
+    height: 35px;
+    width: 60px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#remove-completed-btn {
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 30px;
+}
+
+#delete-button {
+    text-align: center;
+    padding: 10px;
 }

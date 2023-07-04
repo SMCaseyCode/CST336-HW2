@@ -1,18 +1,20 @@
 document.querySelector("#submit-btn").addEventListener("click", sendData);
+document.querySelector("#remove-completed-btn").addEventListener("click", deleteChecked);
 document.querySelector("#input-item").addEventListener("keydown", (event) => {
     if (event.isComposing || event.keyCode === 13) {
         sendData();
     }
 })
 
-let todoList = [];
+let todoList = JSON.parse(localStorage.items);
+localStorage.setItem("items", JSON.stringify(todoList));
+
+displayItems();
 
 // Main driver function
 function sendData() {
     let newItem = document.querySelector("#input-item").value;
     document.querySelector("#input-item").value = '';
-    // Clears display 
-    clearDisplay();
     
     // Checks if inserted item is valid, if so, add to list
     if (isValid(newItem)) {
@@ -20,6 +22,7 @@ function sendData() {
     }
     
     displayItems();
+    editChecked();
 }
 
 function isValid(newItem) {
@@ -33,7 +36,11 @@ function addItem(newItem) {
 
 function displayItems(){
     let itemList = document.querySelector("#item-list");
-    
+    localStorage.items = JSON.stringify(todoList);
+
+    // Clears display
+    clearDisplay();
+    todoList = JSON.parse(localStorage.items);
     for (let i = 0; i < todoList.length; i++){
         itemList.innerHTML += 
             `
@@ -43,14 +50,36 @@ function displayItems(){
                 </div>
                 
                 <div class="item-text">
-                    <h3>${todoList[i]}</h3>
+                    <h3 id="item${i}">${todoList[i]}</h3>
                 </div> 
                 
                 <div class="item-selections">
-                    <input type="checkbox" name="complete">
+                    <input type="checkbox" name="complete" id="checkbox${i}"/>
                 </div>
              </div>
             `;
+    }
+}
+
+function deleteChecked() {
+    for (let i = todoList.length - 1; i >= 0; i--){
+        let isChecked = document.getElementById(`checkbox${i}`).checked;
+        
+        if (isChecked){
+            todoList.splice(i, 1);
+        }
+    }
+    
+    displayItems();
+}
+
+function editChecked(){
+    for (let i = 0; i < todoList.length; i++){
+        let isChecked = document.getElementById(`checkbox${i}`).checked;
+
+        if (isChecked){
+            document.getElementById(`#item${i}`).style.textDecoration = "line-through";
+        }
     }
 }
 
