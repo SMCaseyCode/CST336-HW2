@@ -23,15 +23,26 @@ function sendData() {
     displayItems();
 }
 
+
+
+
+/////////////////// SUPPORTING FUNCTIONS ///////////////////
+
+
+// Checks Validity of input
 function isValid(newItem) {
     newItem = newItem.replace(/\s+/g, '');
     return newItem !== '';
 }
 
+
+// Adds item to list
 function addItem(newItem) {
     todoList.push({text: newItem, checked: false});
 }
 
+
+// Displays Items + gives listeners
 function displayItems(){
     let itemList = document.querySelector("#item-list");
     document.querySelector("#no-items").innerHTML = '';
@@ -57,15 +68,24 @@ function displayItems(){
                 <div class="item-selections">
                     <input type="checkbox" name="complete" id="checkbox${index}" ${item.checked ? 'checked' : ''}/>
                 </div>
+                <div class="item-selections">
+                    <input type="image" src="img/delete-button.png" name="remove" id="removeimg${index}"/>
+                </div>
              </div>
             `;
 
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const deleteButtons = document.querySelectorAll('input[type="image"]');
 
-        // Not going to lie, ripped this from StackOverflow
         checkboxes.forEach((checkbox, index) => {
             checkbox.addEventListener("change", () => {
                 editChecked(index);
+            });
+        });
+
+        deleteButtons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+                deleteItem(index);
             });
         });
     });
@@ -78,6 +98,8 @@ function displayItems(){
     }
 }
 
+
+// Deletes all `completed` tasks
 function deleteChecked() {
     for (let i = todoList.length - 1; i >= 0; i--){
         let isChecked = document.getElementById(`checkbox${i}`).checked;
@@ -90,6 +112,14 @@ function deleteChecked() {
     displayItems();
 }
 
+// Deletes singular entries - triggered by event listener
+function deleteItem(index){
+    todoList.splice(index, 1);
+    localStorage.setItem("items", JSON.stringify(todoList));
+    displayItems();
+}
+
+// Changes item styling to `line-through` if `completed`
 function editChecked(index){
     let isChecked = document.getElementById(`checkbox${index}`).checked;
         
@@ -105,6 +135,7 @@ function editChecked(index){
     localStorage.setItem("items", JSON.stringify(todoList));
 }
 
+// Clears display for changes
 function clearDisplay(){
     document.querySelector("#item-list").innerHTML = '';
 }
