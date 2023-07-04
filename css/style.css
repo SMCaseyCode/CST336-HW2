@@ -31,7 +31,7 @@ body {
     text-align: center;
     padding: 0 20px;
     font-size: 20px;
-    width: 90%;
+    width: 85%;
     word-wrap: break-word;
 }
 
@@ -62,6 +62,7 @@ body {
 }
 .item-wrapper h3 {
     margin: 0;
+    min-width: 31px;
 }
 
 #input-item {
