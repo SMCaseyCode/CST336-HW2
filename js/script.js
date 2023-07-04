@@ -36,6 +36,7 @@ function addItem(newItem) {
 
 function displayItems(){
     let itemList = document.querySelector("#item-list");
+    document.querySelector("#no-items").innerHTML = '';
     localStorage.items = JSON.stringify(todoList);
 
     // Clears display
@@ -58,6 +59,13 @@ function displayItems(){
                 </div>
              </div>
             `;
+    }
+    
+    if (todoList.length === 0){
+        document.querySelector("#no-items").innerHTML = `<img src="img/no-items.png" alt="No items found"/>`;
+        document.querySelector("#remove-completed-btn").style.visibility = "hidden";
+    }else {
+        document.querySelector("#remove-completed-btn").style.visibility = "visible";
     }
 }
 

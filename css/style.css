@@ -1,14 +1,20 @@
-.content, .list, #title {
-    border-color: red;
-    border-style: dashed;
+body {
+    background-color: #fbecce;
+}
+
+.content {
+    background-color: #fbecce;
 }
 
 #title {
     text-align: center;
+    margin: 60px 0;
+    font-size: 50px;
 }
 
 .content {
-    margin: 4em;
+    margin: 4em 20em;
+    box-shadow: 1px 1px 5px 5px;
 }
 
 .item-number {
@@ -20,7 +26,8 @@
     text-align: center;
     padding: 0 20px;
     font-size: 20px;
-    width: 100%;
+    width: 90%;
+    word-wrap: break-word;
 }
 
 .item-selections input {
@@ -38,6 +45,7 @@
     border-style: solid;
     border-radius: 10px;
     box-shadow: 3px 3px;
+    background-color: #fdf5e6;
 }
 .item-wrapper h3 {
     margin: 0;
@@ -45,22 +53,29 @@
 
 #input-item {
     width: 450px;
-    height: 30px;
+    height: 45px;
     margin: 1em;
     padding-left: 20px;
     border-style: double;
     border-radius: 3px;
+    font-size: 20px;
+}
+
+::placeholder {
+    font-size: 20px;
 }
 
 .input-container {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 #submit-btn {
-    height: 35px;
-    width: 60px;
+    height: 50px;
+    width: 80px;
     border-radius: 3px;
     cursor: pointer;
+    font-size: 20px;
 }
 
 #remove-completed-btn {
@@ -68,9 +83,17 @@
     border-radius: 3px;
     cursor: pointer;
     height: 30px;
+    font-size: 20px;
 }
 
 #delete-button {
     text-align: center;
     padding: 10px;
+}
+
+#no-items img{
+    width: 570px;
+    padding: 30px;
+    display: block;
+    margin: 20px auto 0;
 }
