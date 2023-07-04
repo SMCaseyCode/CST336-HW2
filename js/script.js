@@ -1,17 +1,26 @@
+// Calls sendData when the `Add` button is pressed
 document.querySelector("#submit-btn").addEventListener("click", sendData);
+
+// Calls deleteChecked when `Remove Completed Tasks` button is pressed
 document.querySelector("#remove-completed-btn").addEventListener("click", deleteChecked);
+
+// Allows user to press `Enter` instead of the `Add` button
 document.querySelector("#input-item").addEventListener("keydown", (event) => {
     if (event.isComposing || event.keyCode === 13) {
         sendData();
     }
 })
 
+// Fills todoList with current items in localStorage (if any)
+// JSON format lets us save more than just Strings
 let todoList = JSON.parse(localStorage.items);
 displayItems();
 
 // Main driver function
 function sendData() {
     let newItem = document.querySelector("#input-item").value;
+    
+    // Resets input box after submission
     document.querySelector("#input-item").value = '';
     
     // Checks if inserted item is valid, if so, add to list
@@ -31,6 +40,7 @@ function sendData() {
 
 // Checks Validity of input
 function isValid(newItem) {
+    // This checks to see if input is just empty space
     newItem = newItem.replace(/\s+/g, '');
     return newItem !== '';
 }
@@ -50,6 +60,7 @@ function displayItems(){
     // Clears display
     clearDisplay();
     
+    // Fills HTML with items from todoList
     todoList.forEach((arrItem, index) => {
         const item = todoList[index];
         const isChecked = item.checked;
@@ -78,18 +89,21 @@ function displayItems(){
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const deleteButtons = document.querySelectorAll('input[type="image"]');
 
+    // Gives all checkboxes eventListeners; When changed, calls editChecked function
     checkboxes.forEach((checkbox, index) => {
         checkbox.addEventListener("change", () => {
             editChecked(index);
         });
     });
 
+    // Gives all delete buttons eventListeners; When clicked, calls deleteItem function
     deleteButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
             deleteItem(index);
         });
     });
     
+    // If list is empty, show `no-items.png`. Also hides/shows `Remove Completed Tasks` button
     if (todoList.length === 0){
         document.querySelector("#no-items").innerHTML = `<img src="img/no-items.png" alt="No items found"/>`;
         document.querySelector("#remove-completed-btn").style.visibility = "hidden";
@@ -101,9 +115,11 @@ function displayItems(){
 
 // Deletes all `completed` tasks
 function deleteChecked() {
+    // Reversed because removing indexes while increasing `i` value is a bad idea, reversing fixes this
     for (let i = todoList.length - 1; i >= 0; i--){
         let isChecked = document.getElementById(`checkbox${i}`).checked;
         
+        // if item is marked as complete, remove that item from todoList
         if (isChecked){
             todoList.splice(i, 1);
         }
