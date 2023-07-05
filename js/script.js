@@ -11,6 +11,10 @@ document.querySelector("#input-item").addEventListener("keydown", (event) => {
     }
 });
 
+if (localStorage.getItem("items") === null){
+    localStorage.setItem("items", JSON.stringify(''));
+}
+
 // Fills todoList with current items in localStorage (if any)
 // JSON format lets us save more than just Strings
 let todoList = JSON.parse(localStorage.items);
