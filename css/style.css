@@ -100,6 +100,7 @@ body {
     height: 35px;
     font-size: 20px;
     background-color: white;
+    visibility: hidden;
 }
 
 #submit-btn:hover {
