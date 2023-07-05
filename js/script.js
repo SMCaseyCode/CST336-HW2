@@ -11,14 +11,12 @@ document.querySelector("#input-item").addEventListener("keydown", (event) => {
     }
 });
 
-// Initializes localStorage for first time run
-if (localStorage.getItem("items") === null){
-    localStorage.setItem("items", JSON.stringify(''));
-}
-
 // Fills todoList with current items in localStorage (if any)
 // JSON format lets us save more than just Strings
-const todoList = JSON.parse(localStorage.items);
+let todoList = [];
+if (localStorage.getItem("items") !== null) {
+    todoList = JSON.parse(localStorage.items) || [];
+}
 displayItems();
 
 // Main driver function
