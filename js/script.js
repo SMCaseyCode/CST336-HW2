@@ -11,18 +11,19 @@ document.querySelector("#input-item").addEventListener("keydown", (event) => {
     }
 });
 
+// Initializes localStorage for first time run
 if (localStorage.getItem("items") === null){
     localStorage.setItem("items", JSON.stringify(''));
 }
 
 // Fills todoList with current items in localStorage (if any)
 // JSON format lets us save more than just Strings
-let todoList = JSON.parse(localStorage.items);
+const todoList = JSON.parse(localStorage.items);
 displayItems();
 
 // Main driver function
 function sendData() {
-    let newItem = document.querySelector("#input-item").value;
+    const newItem = document.querySelector("#input-item").value;
     
     // Resets input box after submission
     document.querySelector("#input-item").value = '';
@@ -58,7 +59,7 @@ function addItem(newItem) {
 
 // Displays Items + gives listeners
 function displayItems(){
-    let itemList = document.querySelector("#item-list");
+    const itemList = document.querySelector("#item-list");
     document.querySelector("#no-items").innerHTML = '';
 
     // Clears display
@@ -121,7 +122,7 @@ function displayItems(){
 function deleteChecked() {
     // Reversed because removing indexes while increasing `i` value is a bad idea, reversing fixes this
     for (let i = todoList.length - 1; i >= 0; i--){
-        let isChecked = document.getElementById(`checkbox${i}`).checked;
+        const isChecked = document.getElementById(`checkbox${i}`).checked;
         
         // if item is marked as complete, remove that item from todoList
         if (isChecked){
@@ -141,11 +142,11 @@ function deleteItem(index){
 
 // Changes item styling to `line-through` if `completed`
 function editChecked(index){
-    let isChecked = document.getElementById(`checkbox${index}`).checked;
+    const isChecked = document.getElementById(`checkbox${index}`).checked;
         
     todoList[index].checked = isChecked;
 
-    let itemText = document.getElementById(`item${index}`);
+    const itemText = document.getElementById(`item${index}`);
 
     if (isChecked){
         itemText.style.textDecoration = "line-through";
