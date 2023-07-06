@@ -1,5 +1,8 @@
 <h1>CST336-HW2: To Do List</h1>
 
+![Screenshot 2023-07-05 221545](https://github.com/SMCaseyCode/CST336-HW2/assets/104325289/001e4802-60e6-4057-bc9f-7711f82c5dfc)
+
+
 Difficulties faced: <br>
 - Placing event listeners on generated HTML elements
 - Local storage implementations with more complex "data types" (more than just a string)
